@@ -1,33 +1,26 @@
 # Weather App
-
 This is a simple weather app that fetches weather data from the WeatherAPI.com API.
 
 ## Requirements
-
 * Flutter
 * Dart
 * WeatherAPI.com API Key
 
 ## Instructions
-
 1. Clone the repository.
 2. Add your WeatherAPI.com API Key to the `.env` file.
 3. Run `flutter run`.
 
-## Features
+# Output
+##Image -1
+![Screenshot_13](https://github.com/mdrahib46/assignment-9/assets/57681390/1c884d5e-bc34-4300-9df1-30848057ad77)
 
+## Features
 * Fetches weather data for a given location.
 * Displays the current temperature, condition, and last update time.
 * Displays the maximum and minimum temperatures.
 
-## TODO
-
-* Add support for multiple locations.
-* Add a history of weather data.
-* Add a map view.
-
 ## License
-
 This project is licensed under the MIT License.
 Use code with caution. Learn more
 Here is a breakdown of the different sections of the README file:
