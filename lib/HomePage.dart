@@ -1,93 +1,108 @@
-import 'dart:convert';
-
-import 'package:assignment_9/stylePage.dart';
-import 'package:http/http.dart';
-import 'class.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'stylePage.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+
+class WeatherApp extends StatefulWidget {
+  const WeatherApp({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _WeatherAppState createState() => _WeatherAppState();
 }
 
-class _HomePageState extends State<HomePage> {
-  String myApi =
-      'https://api.weatherapi.com/v1/current.json?key=f79f1ab3fa1b46ceae5151004230907&q=bangladesh&aqi=no';
+class _WeatherAppState extends State<WeatherApp> {
+  String? city;
+  String? temperature;
+  String? condition;
+  String? lastUpdate;
+  String? image;
+  String? maxTemp;
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    getWeatherData();
+    fetchWeatherData();
   }
 
-  getWeatherData() async{
-  //  Required
-  // Api, cal get method, url should convert to uri
-    Response response = await get(Uri.parse(myApi));
-    // print(response.body);
-    // print(response.statusCode);
+  Future<void> fetchWeatherData() async {
+    var url =
+        'https://api.weatherapi.com/v1/current.json?key=f79f1ab3fa1b46ceae5151004230907&q=bangladesh&aqi=no';
+    var response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
 
-    final Map<String, dynamic> decodeResponse = jsonDecode(response.body);
-    print(decodeResponse['location'].length);
-    print(decodeResponse['location']);
+      city = jsonData['location']['name'].toString();
+      temperature = jsonData['current']['temp_c'].toString();
+      condition = jsonData['current']['condition']['text'];
+      lastUpdate = jsonData['current']['last_updated'];
+      image = jsonData['current']['condition']['icon'];
+      maxTemp = jsonData['current']['feelslike_c'].toString();
 
-    decodeResponse['location'].forEach((e) {
 
-
-
-    });
+      if (mounted) {
+        setState(() {});
+      }
+    }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF5130A8),
+      backgroundColor: const Color(0xFF5130A7),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF7C51FE),
-        title: const Text('Flutter Weather', style: TextStyle(fontSize: 22)),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-        ],
+        centerTitle: true,
+        backgroundColor: const Color(0xFF7B51FB),
+        title: const Text('Weather App'),
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 70),
-              Text(
-                'Dhaka',
-                style: cityNameHeader,
+        child: Column(
+          children: [
+            const SizedBox(height: 70),
+            Text(
+              city ?? '',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 10),
-              Text(
-                'Updated: 10:15',
-                style: currentTime,
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                Icon(Icons.map, size: 60, color: Colors.white,),
-                Text('35°', style: tempTxtStyle,)
+            ),
+            const SizedBox(height: 10),
+            Text('Last Update: $lastUpdate', style: TextStyle(fontSize: 20, color: Colors.white),),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
 
-              ],),
-              const SizedBox(height: 10),
-              Text(
-                'Thunderstorm',
-                style: weatherCondition,
-              ),
-            ],
-          ),
+                Image.network('api.weatherapi.com//cdn.weatherapi.com/weather/64x64/night/119.png', errorBuilder: (_, __, ___){
+                  return const Icon(Icons.sunny, color: Colors.white,);
+
+                },),
+                const SizedBox(width: 20),
+                Text(
+                  "${temperature ?? ''}°",
+                  style: const TextStyle(color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 20),
+                Column(
+                  children: [
+                    Text('Max temp: ${maxTemp?? "" }°',style: maxMintempStyle),
+                    /// in this api there is no Minimum temperature.
+                    Text('Min temp: 25°',style: maxMintempStyle),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 20),
+            Text(
+              condition ?? '',
+              style: weatherCondition,
+            ),
+          ],
         ),
       ),
     );
   }
 }
+

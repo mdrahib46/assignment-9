@@ -11,7 +11,7 @@ TextStyle currentTime = const TextStyle(
 
 );
 TextStyle weatherCondition = const TextStyle(
-  fontSize: 25,
+  fontSize: 35,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
@@ -21,5 +21,7 @@ TextStyle tempTxtStyle = const TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
+TextStyle maxMintempStyle = const TextStyle(color: Colors.white);
 
 

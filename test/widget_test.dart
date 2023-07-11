@@ -1,30 +1,108 @@
-// This is a basic Flutter widget test.
+// import 'dart:convert';
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:assignment_9/main.dart';
-
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
-}
+// import 'package:assignment_9/stylePage.dart';
+// import 'package:http/http.dart';
+// // import 'class.dart';
+// import 'package:flutter/material.dart';
+//
+// class HomePage extends StatefulWidget {
+//   const HomePage({Key? key}) : super(key: key);
+//
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
+//
+// class _HomePageState extends State<HomePage> {
+//   String myApi =
+//       'https://api.weatherapi.com/v1/current.json?key=f79f1ab3fa1b46ceae5151004230907&q=bangladesh&aqi=no';
+//
+//   String data;
+//
+//   @override
+//   void initState(){
+//     super.initState();
+//     getWeatherData();
+//   }
+//
+//   getWeatherData() async{
+//     //  Required
+//     // Api, cal get method, url should convert to uri
+//     Response response = await get(Uri.parse(myApi));
+//     // print(response.body);
+//     // print(response.statusCode);
+//
+//     // final Map<String, dynamic> decodeResponse = jsonDecode(response.body);
+//     //
+//     // final Map<String, dynamic> data1 = jsonDecode(decodeResponse['location']);
+//
+//     final String json = '{"name": "John Doe", "age": 30, "country": "USA"}';
+//     data = jsonDecode(json);
+//
+//     // print(decodeResponse['location'].length);
+//     // print(decodeResponse['location']);
+//     //
+//     // var currentLocation = decodeResponse['location']['name'];
+//     // print(currentLocation);
+//     // data.add(decodeResponse['location']['name']);
+//
+//
+//
+//   }
+//
+//   // var currentLocation=decodeResponse['name'];
+//   // var currentWeatherConditions=decodeResponse['weather'][0]['main'];
+//   // var icon=decodeResponse['weather'][0]['icon'];
+//   // var temperature=decodeResponse['main']['temp'];
+//   // var mintemperature=decodeResponse['main']['temp_min'];
+//   // var maxtemperature=decodeResponse['main']['temp_max'];
+//
+//   // @override
+//   // Widget build(BuildContext context) {
+//   //   return Scaffold(
+//   //     backgroundColor: const Color(0xFF5130A8),
+//   //     appBar: AppBar(
+//   //       backgroundColor: const Color(0xFF7C51FE),
+//   //       title: const Text('Flutter Weather', style: TextStyle(fontSize: 22)),
+//   //       actions: [
+//   //         IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+//   //         IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+//   //       ],
+//   //     ),
+//   //     body: Center(
+//   //       child: Padding(
+//   //         padding: const EdgeInsets.all(30),
+//   //         child: Column(
+//   //           mainAxisAlignment: MainAxisAlignment.start,
+//   //           children: [
+//   //             const SizedBox(height: 70),
+//   //             Text(
+//   //               'Dhaka',
+//   //               style: cityNameHeader,
+//   //             ),
+//   //             const SizedBox(height: 10),
+//   //             Text(
+//   //               'Updated: 10:15',
+//   //               style: currentTime,
+//   //             ),
+//   //             const SizedBox(
+//   //               height: 50,
+//   //             ),
+//   //             Row(
+//   //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//   //               children: [
+//   //                 Icon(Icons.map, size: 60, color: Colors.white,),
+//   //                 Text('35°', style: tempTxtStyle,)
+//   //
+//   //               ],),
+//   //             const SizedBox(height: 10),
+//   //             Text(
+//   //               'Thunderstorm',
+//   //               style: weatherCondition,
+//   //             ),
+//   //           ],
+//   //         ),
+//   //       ),
+//   //     ),
+//   //   );
+//   // }
+// }
